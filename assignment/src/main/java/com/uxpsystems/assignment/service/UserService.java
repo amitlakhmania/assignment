@@ -11,11 +11,11 @@ public interface UserService {
 
 	User findById(Long id);
 
-	User saveUser();
+	void saveUser(User user);
 
-	void updateUser();
+	void updateUser(User user);
 
-	void deleteUser();
+	void deleteUser(Long Id);
 
 	List<User> findAllUsers();
 

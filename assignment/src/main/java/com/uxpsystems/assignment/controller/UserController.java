@@ -28,19 +28,27 @@ public class UserController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/user")
-	public User createUser(@RequestBody User user){
-		return userService.saveUser();			
+	public void createUser(@RequestBody User user){
+		user.setUsername("Ram");
+		user.setPassword("Kumar");
+		user.setStatus("Activated");
+		 userService.saveUser(user);			
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE,value="/users/{id}")
 	public String deleteUsers(@PathVariable(value="id") Long id){
-		 userService.deleteUser();		
+		 userService.deleteUser(id);		
 		return "User Scuessfully Deleted";
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,value="/user/{id}")
+	@RequestMapping(method=RequestMethod.GET,value="/users/{id}")
 	public User findUserById(@PathVariable(value="id") Long id){
 		return userService.findById(id);			
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT,value="/user/{id}")
+	public void updateUser(@RequestBody User user){
+		 userService.updateUser(user);			
 	}
 	
 

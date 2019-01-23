@@ -1,7 +1,6 @@
 package com.uxpsystems.assignment.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,9 +21,29 @@ public class UserDaoImpl implements UserDao {
 		return jdbcTemplate.query("select * from User",new BeanPropertyRowMapper<User>(User.class));
 	}
 
-	public User findById(long id) {
+	@Override
+	public void saveUser(User user) {
+		 jdbcTemplate.queryForObject("insert into user values(user_SEQ.nextval,?,?,?);",
+				new BeanPropertyRowMapper<User>(User.class));
+	}
+
+	@Override
+	public User findById(Long id) {
 		return jdbcTemplate.queryForObject("select * from User where id=?", new Object[] { id },
 				new BeanPropertyRowMapper<User>(User.class));
+	}
+	
+	@Override
+	public void deleteUser(Long id) {
+		jdbcTemplate.queryForObject("delete from User where id=?", new Object[] { id },
+				new BeanPropertyRowMapper<User>(User.class));
+		
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
