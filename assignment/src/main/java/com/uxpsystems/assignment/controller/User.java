@@ -1,6 +1,8 @@
 
 package com.uxpsystems.assignment.controller;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +12,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class User {
+public class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column
 	@GeneratedValue(strategy= GenerationType.IDENTITY)

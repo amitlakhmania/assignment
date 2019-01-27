@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Handling Form Submission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Form</h1>
+	<form class="form-signin" method="POST" action="/addUser">
+		<h2 class="form-signin-heading">User Creation Form</h2>
+		<input class="form-control" type="text" required name="username"
+			placeholder="Username"></br> <input class="form-control"
+			type="password" required name="password" placeholder="Password"></br>
+		<div >
+			<select name="status">
+				<option value="Activated">Activated</option>
+				<option value="De-activated">De-activated</option>
+			</select>
+		</div>
+		<label class="checkbox"></label>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Add
+			User</button>
+	</form>
+</body>
+</html>

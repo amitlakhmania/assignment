@@ -3,11 +3,14 @@ package com.uxpsystems.assignment.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.uxpsystems.assignment.service.UserService;
 
@@ -17,9 +20,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/assignment")
-	public String greetUser() {
-		return "Hi Amit, Let's get User details";
+	@RequestMapping(value= {"/","/assignment"}, method = RequestMethod.GET)
+	public ModelAndView greetUser(ModelMap model) {
+		ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("assignment");		
+		return modelAndView;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/users")
@@ -27,12 +32,11 @@ public class UserController {
 		return userService.findAllUsers();			
 	}
 	
-	@RequestMapping(method=RequestMethod.POST,value="/user")
-	public void createUser(@RequestBody User user){
-		user.setUsername("Ram");
-		user.setPassword("Kumar");
-		user.setStatus("Activated");
-		 userService.saveUser(user);			
+	@RequestMapping(method=RequestMethod.POST,value="/addUser", 
+			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, 
+	        produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+	public void createUser( User user){
+		 userService.saveUser(user);		
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE,value="/users/{id}")
